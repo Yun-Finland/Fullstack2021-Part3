@@ -35,9 +35,9 @@ app.get('/api/persons/:id', (request, response, next)=>{
 	Person.findById(request.params.id)
 		.then(person=>{
 			if(person){
-				respons.json(person)
+				response.json(person)
 			}else{
-				respons.status(404).end()
+				response.status(404).end()
 			}
 		})
 		.catch(error=>next(error))	
