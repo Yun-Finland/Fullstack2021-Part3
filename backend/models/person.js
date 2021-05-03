@@ -13,36 +13,36 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFind
   })
 
 const personSchema = new mongoose.Schema({
-    name: {
-      type:String,
-      minlength: 3,
-      validate: {
-        validator: (temp) => {
-          return /\S{3,}/.test(temp);
-        },
-        message: props => `${props.value} is shorter then the minimum allowed lenght (3)`
-      },    
-      required: [true, 'User name is required']
-    },
-    number: {
-      type: String,
-      validate: {
-        validator: function(temp) {
-          return /[0-9]{8,}/.test(temp);
-        },
-        message: props => `${props.value} is not a valid phone number!`
+  name: {
+    type:String,
+    minlength: 3,
+    validate: {
+      validator: (temp) => {
+        return /\S{3,}/.test(temp)
       },
-      required: [true, 'User phone number is required']
+      message: props => `${props.value} is shorter then the minimum allowed lenght (3)`
+    },    
+    required: [true, 'User name is required']
+  },
+  number: {
+    type: String,
+    validate: {
+      validator: function(temp) {
+        return /[0-9]{8,}/.test(temp)
+      },
+      message: props => `${props.value} is not a valid phone number!`
     },
+    required: [true, 'User phone number is required']
+  },
 })
 
 
 personSchema.set('toJSON', {
-    transform: (document, returnedObject) =>{
-        returnedObject.id = returnedObject._id.toString()
-        delete returnedObject._id
-        delete returnedObject.__v
-    }
+  transform: (document, returnedObject) =>{
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
+  }
 })
 
 
